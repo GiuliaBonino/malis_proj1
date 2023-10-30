@@ -95,44 +95,11 @@ def main():
     validation=pd.read_csv(r"C:\Users\Giulia\Documents\EURECOM\MALIS\proj1\data\validation.csv")
     val_data=np.array(validation[['X1','X2']])
     val_y=np.array(validation[['y']])
-    errors=[]
-    for p in range(1,4):
-        print(f"p is {p}")
-        for k in range(1,10):
-            print(f"k is {k}")
-            knn=KNN(k,p)
-            
-            knn.train(training_data, training_y)
-        
-
-            y_hat=np.array(knn.predict(val_data)).astype(int)
-            val_y=np.reshape(val_y,(val_y.shape[0]))
-            print(y_hat.shape)
-            print(val_y.shape)
-            error=np.sum(abs(y_hat-val_y))
-            errors.append(error)
-
-            print(f"the error is: {error} out of {len(y_hat)}")
-    print(min(errors))
-
-    from sklearn.neighbors import NearestNeighbors
-    neigh = NearestNeighbors(n_neighbors=2)
-    neigh.fit(training_data, training_y)
-    y_sk=neigh.predict(val_data)
-    error=np.sum(abs(y_sk-val_y))
-
-def main2():
-    import pandas as pd
-    data=pd.read_csv(r"C:\Users\Giulia\Documents\EURECOM\MALIS\proj1\data\training.csv",sep=',') 
-    print(data.head(10))
-    training_data=np.array(data[['X1','X2']])
-    training_y=np.array(data[['y']])
-    validation=pd.read_csv(r"C:\Users\Giulia\Documents\EURECOM\MALIS\proj1\data\validation.csv")
-    val_data=np.array(validation[['X1','X2']])
-    val_y=np.array(validation[['y']])
     
-   
-    knn=KNN(2,2)
+    
+    k=3
+    p=2
+    knn=KNN(k,p)
     
     knn.train(training_data, training_y)
 
@@ -142,16 +109,8 @@ def main2():
     print(y_hat.shape)
     print(val_y.shape)
     error=np.sum(abs(y_hat-val_y))
-    
+  
 
     print(f"the error is: {error} out of {len(y_hat)}")
-    print(error)
 
-    from sklearn.neighbors import KNeighborsClassifier
-    neigh =KNeighborsClassifier(n_neighbors=2)
-    neigh.fit(training_data, training_y)
-    y_sk=neigh.predict(val_data)
-    error=np.sum(abs(y_sk-val_y))
-    print(error)
-
-main2()
+main()
